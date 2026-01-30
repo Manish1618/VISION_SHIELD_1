@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionShield - Deepfake Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    <div class="scan-line"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <svg class="eye-icon flicker-1" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <svg class="shield-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <svg class="eye-icon flicker-2" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+            </div>
+            <h1 class="title">VISIONSHIELD</h1>
+            <div class="subtitle">[ DEEPFAKE DETECTION SYSTEM ]</div>
+            <p class="description">&gt; AI-Powered Media Authenticity Verification Protocol</p>
+            <div class="team-info">&gt; VISIONSHIELD TEAM :: SECURE :: DETECT :: PROTECT</div>
+        </header>
+
+        <!-- Upload Section -->
+        <div id="upload-section" class="card">
+            <div id="drop-zone" class="drop-zone">
+                <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <p class="upload-text">&gt; DRAG & DROP MEDIA FILE</p>
+                <p class="upload-or">[ OR ]</p>
+                <button id="browse-btn" class="btn-primary">[ BROWSE FILES ]</button>
+                <input type="file" id="file-input" accept=".jpg,.jpeg,.png,.mp4,.avi,.mov" hidden>
+                <p class="file-info">&gt; SUPPORTED: JPG | PNG | MP4 | AVI | MOV</p>
+            </div>
+
+            <div id="file-preview" class="file-preview" style="display: none;">
+                <img id="preview-image" class="preview-image" alt="Preview">
+                <p id="file-name" class="file-name"></p>
+                <p id="file-size" class="file-size"></p>
+                <div class="button-group">
+                    <button id="analyze-btn" class="btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        [ ANALYZE MEDIA ]
+                    </button>
+                    <button id="cancel-btn" class="btn-secondary">[ CANCEL ]</button>
+                </div>
+            </div>
+
+            <div id="loading-section" class="loading-section" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <p class="loading-text">&gt; PROCESSING WITH NEURAL NETWORKS...</p>
+                <p class="loading-subtext">&gt; VISIONSHIELD TEAM PROTOCOL ACTIVE</p>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section" class="card" style="display: none;">
+            <div class="result-badge" id="result-badge"></div>
+            
+            <div class="confidence-bars">
+                <div class="confidence-item">
+                    <div class="confidence-header">
+                        <span class="confidence-label">&gt; AUTHENTICITY LEVEL</span>
+                        <span id="real-percent" class="confidence-percent">0%</span>
+                    </div>
+                    <div class="progress-container real">
+                        <div id="real-bar" class="progress-value">
+                            <span class="progress-label">REAL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="confidence-item">
+                    <div class="confidence-header">
+                        <span class="confidence-label fake">&gt; MANIPULATION DETECTED</span>
+                        <span id="fake-percent" class="confidence-percent fake">0%</span>
+                    </div>
+                    <div class="progress-container fake">
+                        <div id="fake-bar" class="progress-value fake">
+                            <span class="progress-label">FAKE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="analysis-info" class="analysis-info">
+                <p>&gt; ANALYSIS COMPLETE</p>
+                <p>&gt; VISIONSHIELD TEAM VERIFICATION PROTOCOL</p>
+                <p id="confidence-score">&gt; CONFIDENCE SCORE: 0%</p>
+            </div>
+
+            <button id="reset-btn" class="btn-primary">[ ANALYZE ANOTHER FILE ]</button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>VISIONSHIELD :: DEEPFAKE DETECTION SYSTEM</span>
+            </div>
+            <p class="footer-team">&gt; Developed by VisionShield Team</p>
+            <p class="footer-motto">&gt; SECURE :: DETECT :: PROTECT</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
